@@ -8,10 +8,11 @@ const FTXClient = require( "ftx-api" ).RestClient;
 
 // Create this file 
 const Account   = require('./key.json');
+
 // ... or just paste your key here:
+
 const API_KEY = Account.API_KEY;
 const API_SECRET = Account.API_SECRET;
-
 
 
 
@@ -19,12 +20,11 @@ const client = new FTXClient( API_KEY, API_SECRET );
 
 const PAGE_LIMIT = 5000;
 
-const START_DATE = seconds( 2022, 11, 1 ); // year, month, day
+const START_DATE = seconds( 2020, 1, 1 ); // year, month, day
 const END_DATE = seconds( 2022, 12, 1 );
 
 // save addresses
 const COINS_SAVED_ADDRESS = ['BTC', 'ETH', 'USDT']
-// const MARKETS_ORDER_HISTORY = ['BTC-PERP', 'ETH-PERP'];
 
 const delay = ms => new Promise( ( resolve, _ ) => setTimeout( () => resolve(), ms ) );
 
