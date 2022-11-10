@@ -40,7 +40,10 @@ const output = {};
         res = await client.requestWrapper.get('historical_balances/requests');
         output.historial_balances_snapshots = res.result;
     } catch ( e ) { print( e ) }
-    
+
+    print('Get balances');
+    res = await client.getBalancesAllAccounts();
+    output.balances = res.result;
 
     // undocumented endpoint
     print('Getting USD snapshots')
