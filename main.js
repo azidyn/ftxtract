@@ -51,7 +51,6 @@ const output = {};
     output.fills_history = await batch_fills();
 
     await delay( 1000 );
-
     
     // undocumented endpoint
     print('Getting USD snapshots')
@@ -298,3 +297,31 @@ async function batch_fills(  ) {
     return fills_history;
 
 }
+
+
+// async function batch_funding(  ) {
+
+//     let d_start = START_DATE, d_end = END_DATE;
+
+//     let funding_history = [];
+
+//     while( true ) {
+//         res = await client.getFundingPayments({ start_time: d_start, end_time: d_end, limit: PAGE_LIMIT });
+
+//         console.log( res )
+
+//         const data = res?.result || [];
+       
+//         if ( !data.length )
+//             break;
+
+//         funding_history = funding_history.concat( data );
+
+//         d_end = ( Date.parse( data[ data.length -1 ].time ) / 1000)>>0;
+        
+//         await delay( 250 );
+//     }
+
+//     return funding_history;
+
+// }
