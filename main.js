@@ -45,6 +45,14 @@ const output = {};
     res = await client.getBalancesAllAccounts();
     output.balances = res.result;
 
+    await delay( 1000 );
+
+    print('Get fills history')
+    output.fills_history = await batch_fills();
+
+    await delay( 1000 );
+
+    
     // undocumented endpoint
     print('Getting USD snapshots')
     res = await client.getUsdValueSnapshots( 100000 )
@@ -265,3 +273,28 @@ async function batch_trigger_history(  ) {
 //     return lend_history;
 
 // }
+
+async function batch_fills(  ) {
+
+    let d_start = START_DATE, d_end = END_DATE;
+
+    let fills_history = [];
+
+    while( true ) {
+        res = await client.getFills({ start_time: d_start, end_time: d_end, limit: PAGE_LIMIT });
+
+        const data = res?.result || [];
+       
+        if ( !data.length )
+            break;
+
+        fills_history = fills_history.concat( data );
+
+        d_end = ( Date.parse( data[ data.length -1 ].time ) / 1000)>>0;
+        
+        await delay( 250 );
+    }
+
+    return fills_history;
+
+}
